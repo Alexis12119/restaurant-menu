@@ -1,18 +1,262 @@
-import React from 'react';
-import Menu from './Menu';
+import React from "react";
+const MenuItem = ({ name, price, sizes }) => {
+  const defaultImage = 'https://via.placeholder.com/150'; // Placeholder image
 
-function App() {
   return (
-    <div className="bg-red-700 min-h-screen text-gray-200">
-      <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-center py-4 sm:py-6 md:py-8 bg-gradient-to-r from-red-600 via-red-500 to-red-700 text-white shadow-lg font-dancing bg-opacity-90">
-        Keren's Restaurant Menu
-      </h1>
-      <div className="flex justify-center mb-4 sm:mb-6">
-        <div className="w-1/2 sm:w-1/4 h-1 bg-black rounded"></div>
-      </div>
-      <Menu />
+    <div className="bg-black p-4 text-center rounded-lg shadow-lg transition-transform transform hover:scale-105 text-white">
+      <img 
+        src={defaultImage} 
+        alt={name} 
+        className="w-24 h-24 rounded-full mx-auto mb-4 border-4 border-gray-300"
+      />
+      <h3 className="text-xl font-bold text-red-500 mb-1">{name}</h3>
+      {price && <p className="text-gray-300 mb-2">{price} Php</p>}
+      {sizes && (
+        <ul className="text-gray-300 text-sm mt-2">
+          {sizes.map((size, index) => (
+            <li key={index} className="flex justify-between border-t border-gray-600 py-1">
+              <span>{size.label}</span>
+              <span>{size.price} Php</span>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
-}
+};
+
+const MenuSection = ({ title, items }) => (
+  <div className="mb-12">
+    <h2 className="text-4xl font-bold text-white text-center mb-8">{title}</h2>
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mx-auto max-w-screen-lg">
+      {items.map((item, index) => (
+        <MenuItem 
+          key={index} 
+          name={item.name} 
+          price={item.price} 
+          sizes={item.sizes} 
+        />
+      ))}
+    </div>
+  </div>
+);
+
+const App = () => {
+  const menu = [
+    {
+      title: "Appetizer",
+      items: [
+        { name: "Fries (1-2 pax)", price: 85 },
+        { name: "Fries w/cheese (1-2 pax)", price: 95 },
+      ],
+    },
+    {
+      title: "Pasta (Solo Order)",
+      items: [
+        { name: "Pasta Carbonara", price: 110 },
+        { name: "Chicken Pesto Pasta", price: 110 },
+        { name: "Meaty Spaghetti", price: 110 },
+        { name: "Pesto Pasta", price: 100 },
+        { name: "Ariabiata", price: 100 },
+      ],
+    },
+    {
+      title: "Dessert",
+      items: [
+        { name: "Manggo Graham", price: 50 },
+        { name: "Matang", price: 40 },
+        { name: "Ice Cream", price: 50 },
+      ],
+    },
+    {
+      title: "Sandwiches Served w/ Potato Wedges",
+      items: [
+        { name: "Clubhouse", price: 150 },
+        { name: "Chicken Sandwich", price: 130 },
+        { name: "Tuna Sandwich", price: 130 },
+        { name: "Cheese and Ham Sandwich", price: 120 },
+      ],
+    },
+    {
+      title: "Drinks",
+      items: [
+        { name: "Bottle Water", price: 15 },
+        { name: "Ice Tea", price: 25 },
+        { name: "Orange Juice", price: 25 },
+      ],
+    },
+    {
+      title: "SoftDrinks",
+      items: [
+        { name: "Coke", price: 20 },
+        { name: "Mountain Dew", price: 20 },
+        { name: "Sprite", price: 20 },
+        { name: "Royal", price: 20 },
+      ],
+    },
+    {
+      title: "Silog Meal Solo Order",
+      items: [
+        { name: "LiempoSilog", price: 95 },
+        { name: "BagnetSilog", price: 95 },
+        { name: "ChickSilog", price: 95 },
+        { name: "SisigSilog", price: 95 },
+        { name: "TociLog", price: 95 },
+        { name: "TapSilog", price: 95 },
+        { name: "LongSilog", price: 95 },
+        { name: "HotSilog", price: 95 },
+        { name: "HamSilog", price: 95 },
+        { name: "ShanghaiSilog", price: 95 },
+      ],
+    },
+    {
+      title: "Sizzling Unli Rice (Dine-in Only)",
+      items: [
+        { name: "Pork Sisig", price: 140 },
+        { name: "Tapa", price: 122 },
+        { name: "Liempo", price: 129 },
+        { name: "Porkchop", price: 129 },
+      ],
+    },
+    {
+      title: "Chicken (Original or Flavored Parmesan/Honey/Buffalo/Oyster)",
+      items: [
+        {
+          name: "Chicken",
+          sizes: [
+            { label: "10pcs", price: 250 },
+            { label: "20pcs", price: 490 },
+            { label: "30pcs", price: 730 },
+            { label: "40pcs", price: 970 },
+            { label: "50pcs", price: 1270 },
+            { label: "100pcs", price: 2300 },
+          ],
+        },
+      ],
+    },
+    {
+      title: "Ulam Party",
+      items: [
+        { name: "Shanghai 100pcs (20-30 pax)", price: 1300 },
+        { name: "Sisig (20-25 pax)", price: 1700 },
+        { name: "Crispy Kare-kare (20-25 pax)", price: 1800 },
+        { name: "Chopsuey (20-25 pax)", price: 1900 },
+        { name: "Menudo (20-25 pax)", price: 1900 },
+        { name: "Caldereta (20-25 pax)", price: 1900 },
+        { name: "Cordon Blue (20-25 pax)", price: 1900 },
+        { name: "Sweet and Sour Pork (20-25 pax)", price: 1900 },
+      ],
+    },
+    {
+      title: "Party Bilao",
+      items: [
+        {
+          name: "Spaghetti",
+          sizes: [
+            { label: "Medium", price: 950 },
+            { label: "Large", price: 1100 },
+          ],
+        },
+        {
+          name: "Carbonara",
+          sizes: [
+            { label: "Medium", price: 1350 },
+            { label: "Large", price: 1600 },
+          ],
+        },
+        {
+          name: "Chicken Pesto Pasta",
+          sizes: [
+            { label: "Medium", price: 1400 },
+            { label: "Large", price: 1650 },
+          ],
+        },
+        {
+          name: "Sea Food Palabok",
+          sizes: [
+            { label: "Medium", price: 950 },
+            { label: "Large", price: 1250 },
+          ],
+        },
+        {
+          name: "Japchae",
+          sizes: [
+            { label: "Medium", price: 1350 },
+            { label: "Large", price: 1600 },
+          ],
+        },
+        { name: "Bake Mac (Foil tray)", price: 1100 },
+      ],
+    },
+    {
+      title: "Combo Platter",
+      items: [
+        { name: "Combo for 3 choices", price: 1600 },
+        { name: "Sisig pork or chicken (Good for 2-4 pax)", price: 170 },
+        { name: "Mekus Platter (Good for 5-6 pax)", price: 850 },
+        { name: "Crispy pata (Good for 5-6 pax)", price: null },
+      ],
+    },
+    {
+      title: "Pancit Bagnet",
+      items: [
+        {
+          name: "Bihon",
+          sizes: [
+            { label: "Small (7-8 pax)", price: 470 },
+            { label: "Medium (12-15 pax)", price: 910 },
+            { label: "Large (20-25 pax)", price: 1250 },
+          ],
+        },
+        {
+          name: "Canton Bihon",
+          sizes: [
+            { label: "Small (7-8 pax)", price: 510 },
+            { label: "Medium (12-15 pax)", price: 1020 },
+            { label: "Large (20-25 pax)", price: 1370 },
+          ],
+        },
+        {
+          name: "Canton",
+          sizes: [
+            { label: "Small (7-8 pax)", price: 520 },
+            { label: "Medium (12-15 pax)", price: 1020 },
+            { label: "Large (20-25 pax)", price: 1420 },
+          ],
+        },
+        {
+          name: "Canton Sotanghon",
+          sizes: [
+            { label: "Small (7-8 pax)", price: 530 },
+            { label: "Medium (12-15 pax)", price: 1030 },
+            { label: "Large (20-25 pax)", price: 1420 },
+          ],
+        },
+        {
+          name: "Miki Bihon",
+          sizes: [
+            { label: "Small (7-8 pax)", price: 490 },
+            { label: "Medium (12-15 pax)", price: 950 },
+            { label: "Large (20-25 pax)", price: 1310 },
+          ],
+        },
+      ],
+    },
+  ];
+
+  return (
+    <div className="bg-red-700 min-h-screen p-8 flex flex-col items-center">
+      <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white mb-16 text-center leading-tight relative">
+        RKM Kitchenette
+        <span className="absolute inset-x-0 bottom-0 h-1 bg-red-500 rounded-full mx-auto transform scale-x-90 origin-left"></span>
+      </h1>
+      <div className="w-full max-w-5xl">
+        {menu.map((section, index) => (
+          <MenuSection key={index} title={section.title} items={section.items} />
+        ))}
+      </div>
+    </div>
+  );
+};
 
 export default App;
