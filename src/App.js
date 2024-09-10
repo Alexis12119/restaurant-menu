@@ -1,4 +1,5 @@
 import React from "react";
+
 const MenuItem = ({ name, price, sizes }) => {
   const defaultImage = 'https://via.placeholder.com/150'; // Placeholder image
 
