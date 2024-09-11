@@ -1,21 +1,24 @@
 import React from "react";
 
 const MenuItem = ({ name, price, sizes }) => {
-  const defaultImage = 'https://via.placeholder.com/150'; // Placeholder image
+  const defaultImage = "https://via.placeholder.com/150"; // Placeholder image
 
   return (
-    <div className="bg-black p-4 text-center rounded-lg shadow-lg transition-transform transform hover:scale-105 text-white">
-      <img 
-        src={defaultImage} 
-        alt={name} 
-        className="w-24 h-24 rounded-full mx-auto mb-4 border-4 border-gray-300"
+    <div className="bg-black p-4 text-center rounded-lg shadow-lg transition-transform transform hover:scale-105 text-white border border-red-500">
+      <img
+        src={defaultImage}
+        alt={name}
+        className="w-24 h-24 rounded-full mx-auto mb-4 border-4 border-red-500"
       />
-      <h3 className="text-xl font-bold text-red-500 mb-1">{name}</h3>
-      {price && <p className="text-gray-300 mb-2">{price} Php</p>}
+      <h3 className="text-xl font-bold text-red-400 mb-1">{name}</h3>
+      {price && <p className="text-gray-200 mb-2">{price} Php</p>}
       {sizes && (
-        <ul className="text-gray-300 text-sm mt-2">
+        <ul className="text-gray-200 text-sm mt-2">
           {sizes.map((size, index) => (
-            <li key={index} className="flex justify-between border-t border-gray-600 py-1">
+            <li
+              key={index}
+              className="flex justify-between border-t border-gray-700 py-1"
+            >
               <span>{size.label}</span>
               <span>{size.price} Php</span>
             </li>
@@ -27,21 +30,23 @@ const MenuItem = ({ name, price, sizes }) => {
 };
 
 const MenuSection = ({ title, items }) => (
-  <div className="mb-12">
-    <h2 className="text-4xl font-bold text-white text-center mb-8">{title}</h2>
+  <div className="mb-12 text-center">
+    <h2 className="text-3xl md:text-4xl font-bold text-red-400 mb-8 p-4 rounded-full border-4 border-red-500 bg-black mx-auto inline-block">
+      {title}
+    </h2>
+
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mx-auto max-w-screen-lg">
       {items.map((item, index) => (
-        <MenuItem 
-          key={index} 
-          name={item.name} 
-          price={item.price} 
-          sizes={item.sizes} 
+        <MenuItem
+          key={index}
+          name={item.name}
+          price={item.price}
+          sizes={item.sizes}
         />
       ))}
     </div>
   </div>
 );
-
 const App = () => {
   const menu = [
     {
@@ -246,14 +251,17 @@ const App = () => {
   ];
 
   return (
-    <div className="bg-red-700 min-h-screen p-8 flex flex-col items-center">
-      <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white mb-16 text-center leading-tight relative">
+    <div className="bg-gradient-to-r from-red-900 via-red-800 to-red-900 min-h-screen p-8 flex flex-col items-center">
+      <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-red-400 mb-16 text-center leading-tight relative rounded-full border-4 border-red-500 py-2 px-6 bg-black shadow-lg shadow-red-500">
         RKM Kitchenette
-        <span className="absolute inset-x-0 bottom-0 h-1 bg-red-500 rounded-full mx-auto transform scale-x-90 origin-left"></span>
       </h1>
       <div className="w-full max-w-5xl">
         {menu.map((section, index) => (
-          <MenuSection key={index} title={section.title} items={section.items} />
+          <MenuSection
+            key={index}
+            title={section.title}
+            items={section.items}
+          />
         ))}
       </div>
     </div>
