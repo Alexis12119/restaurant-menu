@@ -11,7 +11,7 @@ const MenuItem = ({ name, price, sizes }) => {
         className="w-24 h-24 rounded-full mx-auto mb-4 border-4 border-red-500"
       />
       <h3 className="text-xl font-bold text-red-400 mb-1">{name}</h3>
-      {price && <p className="text-gray-200 mb-2">{price} Php</p>}
+      {price && <p className="text-gray-200 mb-2">₱ {price}</p>}
       {sizes && (
         <ul className="text-gray-200 text-sm mt-2">
           {sizes.map((size, index) => (
@@ -20,7 +20,7 @@ const MenuItem = ({ name, price, sizes }) => {
               className="flex justify-between border-t border-gray-700 py-1"
             >
               <span>{size.label}</span>
-              <span>{size.price} Php</span>
+              <span>₱ {size.price}</span>
             </li>
           ))}
         </ul>
